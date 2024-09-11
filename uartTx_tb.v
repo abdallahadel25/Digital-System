@@ -1,6 +1,8 @@
+`timescale 1ns\1ps
+
 module uartTx_tb;
 
-parameter clkPeriod = 10;
+parameter clkPeriod = 5;
 parameter cases = 10;
 parameter dataWidth = 8;
 
