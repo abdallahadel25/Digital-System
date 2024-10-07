@@ -15,7 +15,7 @@ reg 		data_valid_tb;
 reg 		par_en_tb;
 reg 		par_type_tb;
 reg 		clk_tb;
-reg		rst_tb;
+reg			rst_tb;
 wire		tx_out_tb;
 wire		busy_tb;
 
