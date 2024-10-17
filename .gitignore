@@ -3,3 +3,5 @@
 *.rar
 *.wlf
 work/
+dump.vcd
+transcript

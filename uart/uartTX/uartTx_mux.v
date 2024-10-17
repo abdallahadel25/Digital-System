@@ -21,6 +21,7 @@ case(mux_sel)
 	data: tx_out = ser_data;
 	parity: tx_out = par;
 	stopBit: tx_out = 1'b1;
+	default: tx_out = 1'b0;
 endcase
 end
 endmodule 

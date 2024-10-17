@@ -1,4 +1,4 @@
-`timescale 1ns\1ps
+`timescale 1ns/1ps
 
 module uartTx_tb;
 
@@ -41,7 +41,7 @@ begin
 	data_valid_tb = 1'b0;
 	par_en_tb = 1'b1;
 	par_type_tb = 1'b0;
-	$readmemh("testCases.txt",testCases);
+	$readmemh("uart/testCases.txt",testCases);
 	@(negedge clk_tb);
 end
 endtask
@@ -69,7 +69,7 @@ endtask
 
 task readData;
 begin
-	#(clkPeriod/2)
+	#(clkPeriod/2.0)
 	for(j=0;j<11;j=j+1)
 	begin
 		fetchedData[j] = tx_out_tb;
@@ -78,12 +78,12 @@ begin
 end
 endtask
 
-always #(clkPeriod/2) clk_tb = ~(clk_tb);
+always #(clkPeriod/2.0) clk_tb = ~(clk_tb);
 
 initial
 begin
 
-$dumpfile("uartTx.vcd");
+$dumpfile("uartTX/uartTx.vcd");
 $dumpvars;
 
 initialize();
