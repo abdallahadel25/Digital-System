@@ -2,11 +2,11 @@ module parity#(
 parameter dataWidth = 8
 )(
 input 	wire [dataWidth-1:0]	p_data,
-input 	wire 			data_valid,
-input 	wire 			par_type,
-input	wire 			clk,
-input	wire 			rst,
-output 	reg 			par
+input 	wire 					data_valid,
+input 	wire 					par_type,
+input	wire 					clk,
+input	wire 					rst,
+output 	reg 					par
 );
 
 always @(posedge clk or negedge rst)

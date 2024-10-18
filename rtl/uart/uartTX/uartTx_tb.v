@@ -41,7 +41,7 @@ begin
 	data_valid_tb = 1'b0;
 	par_en_tb = 1'b1;
 	par_type_tb = 1'b0;
-	$readmemh("uart/testCases.txt",testCases);
+	$readmemh("rtl/uart/testCases.txt",testCases);
 	@(negedge clk_tb);
 end
 endtask
@@ -52,7 +52,7 @@ begin
 	#(clkPeriod)
 	rst_tb  = 1'b0;
 	#(clkPeriod)
-    	rst_tb  = 1'b1;
+    rst_tb  = 1'b1;
 	#(clkPeriod);
 end
 endtask
@@ -83,7 +83,7 @@ always #(clkPeriod/2.0) clk_tb = ~(clk_tb);
 initial
 begin
 
-$dumpfile("uartTX/uartTx.vcd");
+$dumpfile("rtl/uartTX/uartTx.vcd");
 $dumpvars;
 
 initialize();
@@ -103,5 +103,8 @@ end
 #200 $stop();
 end
 
-always @(posedge busy_tb) readData();
+always @(posedge busy_tb) begin
+	if(rst_tb) readData();
+end
+
 endmodule
