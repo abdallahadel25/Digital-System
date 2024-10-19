@@ -20,9 +20,7 @@ wire		tx_out_tb;
 wire		busy_tb;
 
 uartTX_top #(
-.dataWidth(dataWidth),
-.counterWidth(3),
-.muxSelWidth(3)
+.dataWidth(dataWidth)
 )DUT(
 .p_data(p_data_tb),
 .data_valid(data_valid_tb),
@@ -70,7 +68,7 @@ endtask
 task readData;
 begin
 	#(clkPeriod/2.0)
-	for(j=0;j<11;j=j+1)
+	for(j=0;j<dataWidth+3;j=j+1)
 	begin
 		fetchedData[j] = tx_out_tb;
 		#(clkPeriod);

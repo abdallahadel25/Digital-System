@@ -1,6 +1,5 @@
 module serializer#(
-parameter dataWidth = 8,
-parameter counterWidth = 3
+parameter dataWidth = 8
 )(
 input 	wire [dataWidth-1:0] 	p_data,
 input 	wire 					ser_en,
@@ -10,7 +9,7 @@ output 	wire					ser_data,
 output	wire					ser_done
 );
 
-reg [counterWidth-1:0] 	counter;
+reg [$clog2(dataWidth)-1:0] 	counter;
 reg [dataWidth-1:0]		data_v;
 
 assign ser_done = (counter == 0);
@@ -21,7 +20,7 @@ begin
 	if(!rst)
 	begin
 		data_v <= {dataWidth{1'b0}};
-		counter <= {counterWidth{1'b0}};
+		counter <= {$clog2(dataWidth){1'b0}};
 	end
 	else if (counter != 0)
 	begin

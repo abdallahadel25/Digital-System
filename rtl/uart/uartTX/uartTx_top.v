@@ -1,7 +1,5 @@
 module uartTX_top#(
-parameter dataWidth 	= 8,
-parameter counterWidth 	= 3,
-parameter muxSelWidth 	= 3
+parameter dataWidth = 8
 )(
 input 	wire [dataWidth-1:0]	p_data,
 input 	wire			data_valid,
@@ -20,8 +18,7 @@ wire [2:0] 	mux_sel;
 wire		par;
 
 serializer #(
-	.dataWidth(dataWidth),
-	.counterWidth(counterWidth)
+	.dataWidth(dataWidth)
 )serializer_U0(
 	.p_data(p_data),
 	.ser_en(ser_en),
@@ -54,7 +51,7 @@ parity #(
 );
 
 uartMux #(
-	.muxSelWidth(muxSelWidth)
+	.muxSelWidth($clog2(dataWidth))
 )uartMux_U0(
 	.mux_sel(mux_sel),
 	.ser_data(ser_data),
