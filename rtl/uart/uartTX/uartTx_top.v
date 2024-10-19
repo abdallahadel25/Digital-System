@@ -2,13 +2,13 @@ module uartTX_top#(
 parameter dataWidth = 8
 )(
 input 	wire [dataWidth-1:0]	p_data,
-input 	wire			data_valid,
-input 	wire			par_en,
-input 	wire			par_type,
-input	wire			clk,
-input	wire			rst,
-output 	wire			tx_out,
-output	wire			busy
+input 	wire					data_valid,
+input 	wire					par_en,
+input 	wire					par_type,
+input	wire					clk,
+input	wire					rst,
+output 	wire					tx_out,
+output	wire					busy
 );
 
 wire 		ser_en;

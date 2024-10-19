@@ -1,5 +1,5 @@
 vlib work
-vlog uart/uartTX/*.v
-vsim -voptargs=+acc work.uartTx_tb
-do uart/uartTX/waveTX.do
+vlog rtl/uart/*/*.v
+vsim -voptargs=+acc work.uart_top
+# do rtl/uart/uartTX/waveTX.do
 run -all
