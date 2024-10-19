@@ -1,12 +1,12 @@
 module uartRX_dataSampling(
 input	wire	[5:0]	prescale,
-input	wire		rx_in,
-input	wire		data_sample_en,
+input	wire			rx_in,
+input	wire			data_sample_en,
 input	wire	[4:0]	edge_cnt,
-input	wire		clk,	
-input	wire		rst,
-output	reg		sampled_bit,
-output	reg		data_sampled
+input	wire			clk,	
+input	wire			rst,
+output	reg				sampled_bit,
+output	reg				data_sampled
 );
 
 reg s1;

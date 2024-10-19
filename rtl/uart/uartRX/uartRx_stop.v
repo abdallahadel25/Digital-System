@@ -4,7 +4,7 @@ input	wire	sampled_bit,
 input	wire	data_sampled,
 input	wire	clk,
 input	wire	rst,
-output	reg	stp_err
+output	reg		stp_err
 );
 
 always @(posedge clk or negedge rst)

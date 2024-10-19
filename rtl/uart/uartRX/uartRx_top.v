@@ -36,6 +36,7 @@ uartRX_dataSampling U0_dataSampling(
 
 uartRx_edge_counter U0_edge_counter(
 .edge_cnt_en(edge_cnt_en),
+.par_en(par_en),
 .clk(clk),
 .rst(rst),
 .prescale(prescale),
@@ -47,6 +48,8 @@ uartRXFSM U0_fsm(
 .rx_in(rx_in),
 .par_en(par_en),
 .bit_cnt(bit_cnt),
+.edge_cnt(edge_cnt),
+.prescale(prescale),
 .par_err(par_err),
 .strt_glitch(strt_glitch),
 .stp_err(stp_err),

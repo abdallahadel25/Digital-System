@@ -4,7 +4,7 @@ input	wire	sampled_bit,
 input	wire	data_sampled,
 input	wire	clk,
 input	wire	rst,
-output	reg	strt_glitch
+output	reg		strt_glitch
 );
 
 always @(posedge clk or negedge rst)
