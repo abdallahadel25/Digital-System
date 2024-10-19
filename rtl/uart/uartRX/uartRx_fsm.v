@@ -1,4 +1,6 @@
-module uartRXFSM(
+module uartRXFSM #(
+parameter dataWidth = 8
+)(
 input	wire			rx_in,
 input	wire			par_en,
 input	wire	[3:0]	bit_cnt,
@@ -53,10 +55,10 @@ case(currentState)
 		else nextState = start_bit;
 		end
 	data : begin
-		if (par_en) nextState = (bit_cnt == 9) ? parity_bit : data;
-		else 		nextState = (bit_cnt == 9) ? end_bit : data;
+		if (par_en) nextState = (bit_cnt == dataWidth+1) ? parity_bit : data;
+		else 		nextState = (bit_cnt == dataWidth+1) ? end_bit : data;
 		end
-	parity_bit : nextState = (bit_cnt == 10) ? end_bit : parity_bit;
+	parity_bit : nextState = (bit_cnt == dataWidth+2) ? end_bit : parity_bit;
 	end_bit : nextState = (edge_cnt == prescale-1) ? err_chk : end_bit;
 	err_chk : nextState = (!rx_in) ? start_bit : IDLE;
 	default : nextState = IDLE;

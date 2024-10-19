@@ -7,23 +7,27 @@ parameter total_cases = 10;
 parameter test_cases  = 10;
 parameter prescale_itt = 3;
 
-reg				clk_tx;
+parameter dataWidth = 8;
 
-reg				rx_in_tb;
-reg				par_en_tb;
-reg				par_type_tb;
-wire			data_valid_tb;
-reg 			clk_tb;
-reg				rst_tb;
-reg		[5:0]	prescale_tb;
-wire	[7:0]	p_data_tb;
+reg						clk_tx;
 
-reg	[7:0]	test_data [0:total_cases-1];
-reg [5:0]	prescale_data [0:prescale_itt-1];
+reg						rx_in_tb;
+reg						par_en_tb;
+reg						par_type_tb;
+wire					data_valid_tb;
+reg 					clk_tb;
+reg						rst_tb;
+reg		[5:0]			prescale_tb;
+wire	[dataWidth-1:0]	p_data_tb;
+
+reg	[dataWidth-1:0]	test_data 		[0:total_cases-1];
+reg [5:0]			prescale_data 	[0:prescale_itt-1];
 
 integer i,m,n,k=0,z;
 
-uartRx_top U0_uartRx(
+uartRx_top #(
+    .dataWidth(dataWidth)
+) U0_uartRx(
 .rx_in(rx_in_tb),
 .prescale(prescale_tb),
 .par_en(par_en_tb),
@@ -65,9 +69,9 @@ end
 endtask
 
 task send_par;
-input [10:0] data;
+input [dataWidth+2:0] data;
 begin
-	for(m=0;m<11;m=m+1)
+	for(m=0;m<dataWidth+3;m=m+1)
 	begin
 		@(posedge clk_tx)
 		rx_in_tb = data[m];
@@ -76,9 +80,9 @@ end
 endtask
 
 task send_npar;
-input [9:0] data_n;
+input [dataWidth+1:0] data_n;
 begin
-	for(n=0;n<10;n=n+1)
+	for(n=0;n<dataWidth+2;n=n+1)
 	begin
 		@(posedge clk_tx)
 		rx_in_tb = data_n[n];

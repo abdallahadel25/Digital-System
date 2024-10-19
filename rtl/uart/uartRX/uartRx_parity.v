@@ -1,12 +1,14 @@
-module uartRx_parity(
-input	wire			par_check_en,
-input	wire			sampled_bit,
-input	wire			data_sampled,
-input	wire			par_type,
-input	wire	[7:0]	p_data,
-input	wire			clk,
-input	wire			rst,
-output	reg				par_err
+module uartRx_parity#(
+parameter dataWidth = 8
+)(
+input	wire					par_check_en,
+input	wire					sampled_bit,
+input	wire					data_sampled,
+input	wire					par_type,
+input	wire	[dataWidth-1:0]	p_data,
+input	wire					clk,
+input	wire					rst,
+output	reg						par_err
 );
 
 wire par;

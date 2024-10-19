@@ -1,4 +1,6 @@
-module uartRx_edge_counter(
+module uartRx_edge_counter#(
+parameter dataWidth = 8
+)(
 input	wire			edge_cnt_en,
 input	wire			par_en,
 input	wire			clk,
@@ -9,7 +11,7 @@ output	reg		[3:0]	bit_cnt
 );
 
 wire [3:0] bit_cnt_threshold;
-assign bit_cnt_threshold = (par_en) ? 4'b1010 : 4'b1001;
+assign bit_cnt_threshold = (par_en) ? dataWidth+2 : dataWidth+1;
 
 always @(posedge clk or negedge rst)
 begin

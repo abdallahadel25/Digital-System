@@ -1,27 +1,29 @@
-module uartRx_top(
-input	wire		rx_in,
-input	wire	[5:0]	prescale,
-input	wire		par_en,
-input	wire		par_type,
-input	wire		clk,
-input	wire		rst,
-output	wire		data_valid,
-output	wire	[7:0]	p_data
+module uartRx_top#(
+parameter dataWidth = 8
+)(
+input	wire		            rx_in,
+input	wire	[5:0]	        prescale,
+input	wire		            par_en,
+input	wire		            par_type,
+input	wire		            clk,
+input	wire		            rst,
+output	wire		            data_valid,
+output	wire	[dataWidth-1:0]	p_data
 );
 
-wire		data_sample_en;
+wire		    data_sample_en;
 wire	[4:0]	edge_cnt;
-wire		sampled_bit;
-wire		data_sampled;
+wire		    sampled_bit;
+wire		    data_sampled;
 wire	[3:0]	bit_cnt;
-wire		par_err;
-wire		strt_glitch;
-wire		stp_err;
-wire		edge_cnt_en;
-wire		par_check_en;
-wire		strt_check_en;
-wire		stp_check_en;
-wire		deserializer_en;
+wire		    par_err;
+wire		    strt_glitch;
+wire		    stp_err;
+wire		    edge_cnt_en;
+wire		    par_check_en;
+wire		    strt_check_en;
+wire		    stp_check_en;
+wire		    deserializer_en;
 
 uartRX_dataSampling U0_dataSampling(
 .prescale(prescale),
@@ -34,7 +36,9 @@ uartRX_dataSampling U0_dataSampling(
 .data_sampled(data_sampled)
 );
 
-uartRx_edge_counter U0_edge_counter(
+uartRx_edge_counter #(
+    .dataWidth(dataWidth)
+) U0_edge_counter(
 .edge_cnt_en(edge_cnt_en),
 .par_en(par_en),
 .clk(clk),
@@ -44,7 +48,9 @@ uartRx_edge_counter U0_edge_counter(
 .bit_cnt(bit_cnt)
 );
 
-uartRXFSM U0_fsm(
+uartRXFSM #(
+    .dataWidth(dataWidth)
+) U0_fsm(
 .rx_in(rx_in),
 .par_en(par_en),
 .bit_cnt(bit_cnt),
@@ -64,7 +70,9 @@ uartRXFSM U0_fsm(
 .data_valid(data_valid)
 );
 
-uartRx_deserializer U0_deserializer(
+uartRx_deserializer #(
+    .dataWidth(dataWidth)
+) U0_deserializer(
 .deserializer_en(deserializer_en),
 .sampled_bit(sampled_bit),
 .data_sampled(data_sampled),
@@ -74,7 +82,9 @@ uartRx_deserializer U0_deserializer(
 .p_data(p_data)
 );
 
-uartRx_parity U0_parity(
+uartRx_parity #(
+    .dataWidth(dataWidth)
+) U0_parity(
 .par_check_en(par_check_en),
 .sampled_bit(sampled_bit),
 .data_sampled(data_sampled),
