@@ -2,24 +2,26 @@ module fifo_top#(
 parameter depth = 8,
 parameter data_width = 8
 )(
-input	wire				wclk,
-input	wire				wrst,
-input	wire				winc,
-input	wire				rclk,
-input	wire				rrst,
-input	wire				rinc,
+input	wire				        wclk,
+input	wire				        wrst,
+input	wire				        winc,
+input	wire				        rclk,
+input	wire				        rrst,
+input	wire				        rinc,
 input	wire	[data_width-1:0]	wdata,
 output	wire	[data_width-1:0]	rdata,
-output	wire				wfull,
-output	wire				rempty
+output	wire				        wfull,
+output	wire				        rempty
 );
 
-wire	[$clog2(depth)-1:0]	waddr;
-wire	[$clog2(depth)-1:0]	raddr;
-wire	[$clog2(depth):0]	wptr;
-wire	[$clog2(depth):0]	rptr;
-wire	[$clog2(depth):0]	wptr_sync;
-wire	[$clog2(depth):0]	rptr_sync;
+localparam p_width = $clog2(depth);
+
+wire	[p_width-1:0]	waddr;
+wire	[p_width-1:0]	raddr;
+wire	[p_width:0]	    wptr;
+wire	[p_width:0]	    rptr;
+wire	[p_width:0]	    wptr_sync;
+wire	[p_width:0]	    rptr_sync;
 
 fifo_mem #(
 .depth(depth),
@@ -60,7 +62,7 @@ fifo_rd #(
 );
 
 fifo_DFsync #(
-.data_width($clog2(depth)+1)
+.data_width(p_width+1)
 ) rptr_DF (
 .clk(wclk),
 .rst(wrst),
@@ -69,7 +71,7 @@ fifo_DFsync #(
 );
 
 fifo_DFsync #(
-.data_width($clog2(depth)+1)
+.data_width(p_width+1)
 ) wptr_DF (
 .clk(rclk),
 .rst(rrst),

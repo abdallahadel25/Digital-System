@@ -10,16 +10,16 @@ parameter rclk_period = 25;
 
 parameter testCases = 10;
 
-reg				wclk_tb;
-reg				wrst_tb;
-reg				winc_tb;
-reg				rclk_tb;
-reg				rrst_tb;
-reg				rinc_tb;
-reg	[data_width-1:0]	wdata_tb;
+reg							wclk_tb;
+reg							wrst_tb;
+reg							winc_tb;
+reg							rclk_tb;
+reg							rrst_tb;
+reg							rinc_tb;
+reg		[data_width-1:0]	wdata_tb;
 wire	[data_width-1:0]	rdata_tb;
-wire				wfull_tb;
-wire				rempty_tb;
+wire						wfull_tb;
+wire						rempty_tb;
 
 reg	[data_width-1:0]	testData [0:testCases-1];
 
@@ -49,7 +49,7 @@ begin
 	wclk_tb = 1'b1;
 	wrst_tb = 1'b1;
 	winc_tb = 1'b0;	
-	$readmemh("testCases.txt",testData);
+	$readmemh("rtl/fifo/testCases.txt",testData);
 	@(negedge wclk_tb);
 end
 endtask
@@ -90,18 +90,13 @@ initialize_wr();
 
 reset_wr();
 
-//#(wclk_period*5)
+@(posedge rrst_tb)
+// #(wclk_period*5)
 
-i=0;
-
-while(i != testCases)
+for(i=0;i<testCases;i=i+1)
 begin
-	if(!wfull_tb)
-	begin
-		winc_tb = 1'b1;
-		wdata_tb = testData[i];
-		i = i+1;
-	end
+	wdata_tb = testData[i];
+	winc_tb = 1'b1;
 	#(wclk_period);
 	winc_tb = 1'b0;
 end
