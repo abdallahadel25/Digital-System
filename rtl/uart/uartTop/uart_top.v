@@ -13,7 +13,9 @@ input   wire                    rst,
 output  wire                    tx_out,
 output  wire                    busy,
 output  wire                    data_valid_rx,
-output  wire [dataWidth-1:0]    p_data_rx
+output  wire [dataWidth-1:0]    p_data_rx,
+output  wire                    par_error,
+output  wire                    framing_error
 );
 
 uartTX_top #(
@@ -39,7 +41,9 @@ uartRx_top #(
 .clk(clk_rx),
 .rst(rst),
 .data_valid(data_valid_rx),
-.p_data(p_data_rx)
+.p_data(p_data_rx),
+.par_error(par_error),
+.framing_error(framing_error)
 );
 
 endmodule

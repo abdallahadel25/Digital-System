@@ -8,7 +8,9 @@ input	wire		            par_type,
 input	wire		            clk,
 input	wire		            rst,
 output	wire		            data_valid,
-output	wire	[dataWidth-1:0]	p_data
+output	wire	[dataWidth-1:0]	p_data,
+output  wire                    par_error,
+output  wire                    framing_error
 );
 
 wire		    data_sample_en;
@@ -24,6 +26,9 @@ wire		    par_check_en;
 wire		    strt_check_en;
 wire		    stp_check_en;
 wire		    deserializer_en;
+
+assign par_error = par_err;
+assign framing_error = stp_err;
 
 uartRX_dataSampling U0_dataSampling(
 .prescale(prescale),
