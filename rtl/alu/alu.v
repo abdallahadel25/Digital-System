@@ -41,9 +41,9 @@ always@(*)
             4'b0111: alu_result = ~(A|B);
             4'b1000: alu_result = A^B;
             4'b1001: alu_result = ~(A^B);
-            4'b1010: alu_result = (A==B) ?  {{dataWidth-1{1'b0}},{1'b1}} :{dataWidth{1'b0}};
-            4'b1011: alu_result = (A>B)  ?  {{dataWidth-2{1'b0}},{2'b10}}:{dataWidth{1'b0}};
-            4'b1100: alu_result = (A<B)  ?  {{dataWidth-2{1'b0}},{2'b11}}:{dataWidth{1'b0}};
+            4'b1010: alu_result = (A==B) ?  {{dataWidth-1{1'b0}},1'b1} :{dataWidth{1'b0}};
+            4'b1011: alu_result = (A>B)  ?  {{dataWidth-2{1'b0}},2'b10}:{dataWidth{1'b0}};
+            4'b1100: alu_result = (A<B)  ?  {{dataWidth-2{1'b0}},2'b11}:{dataWidth{1'b0}};
             4'b1101: alu_result = A>>1;
             4'b1110: alu_result = A<<1;
             4'b1110: alu_result = A<<1;
