@@ -40,8 +40,7 @@ reg [6*8:0] test;
 
 initial
     begin
-        $dumpfile("regFile.vcd");
-        $dumpvars;
+
         clk_tb = 1'b1;
         rst_tb = 1'b1;
         wrEn_tb = 1'b0;
@@ -58,7 +57,7 @@ initial
         for(i=0;i<16;i=i+1)
             begin
                 addr_tb = i;
-                #10 $display("regFile[%0d] = %0h",i,rdData_tb);
+                #10 $display("regFile[%0d] = %b",i,rdData_tb);
             end
 
         rdEn_tb = 1'b0;
