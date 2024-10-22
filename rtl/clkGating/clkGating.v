@@ -1,4 +1,4 @@
-module CLK_GATE (
+module clk_gate (
 input      clk_en,
 input      clk,
 output     gated_clk
