@@ -2,6 +2,7 @@
 *.mpf
 *.rar
 *.wlf
+*.zip
 work/
 dump.vcd
 transcript
