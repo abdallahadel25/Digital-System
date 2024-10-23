@@ -17,9 +17,9 @@ assign gated_clk = clk & latch_out;
 /*
 
 TLATNCAX12M U0_TLATNCAX12M (
-.E(CLK_EN),
-.CK(CLK),
-.ECK(GATED_CLK)
+.E(clk_en),
+.CK(clk),
+.ECK(gated_clk)
 );
 
 */
