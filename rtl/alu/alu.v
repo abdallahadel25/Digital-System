@@ -46,7 +46,6 @@ always@(*)
             4'b1100: alu_result = (A<B)  ?  {{dataWidth-2{1'b0}},2'b11}:{dataWidth{1'b0}};
             4'b1101: alu_result = A>>1;
             4'b1110: alu_result = A<<1;
-            4'b1110: alu_result = A<<1;
             4'b1111: alu_result = {dataWidth{1'b0}};
             default: alu_result = {dataWidth{1'b0}};
         endcase

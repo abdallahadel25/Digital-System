@@ -9,7 +9,7 @@ reg latch_out;
 always @(clk or clk_en)
 begin
     if (!clk)
-        latch_out <= clk_en
+        latch_out <= clk_en;
 end
 
 assign gated_clk = clk & latch_out;

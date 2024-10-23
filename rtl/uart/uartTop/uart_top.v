@@ -1,4 +1,4 @@
-module uart_top#(
+module uart_top #(
 parameter dataWidth = 8
 )(
 input   wire [dataWidth-1:0]    p_data_tx,

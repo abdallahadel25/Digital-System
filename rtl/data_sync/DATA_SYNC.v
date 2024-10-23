@@ -1,17 +1,17 @@
 module DATA_SYNC #(
 parameter stages = 2,
-parameter data_width = 8
+parameter dataWidth = 8
 )(
 input	wire						bus_enable,
 input	wire						clk,
 input	wire						rst,
-input	wire	[data_width-1:0]	unsync_bus,
-output	reg		[data_width-1:0]	sync_bus,
+input	wire	[dataWidth-1:0]	unsync_bus,
+output	reg		[dataWidth-1:0]	sync_bus,
 output	reg							enable_pulse
 );
 
 integer i;
-wire	[data_width-1:0]	multiplexed_bus;
+wire	[dataWidth-1:0]	multiplexed_bus;
 wire						comb_pulse;
 
 reg		[stages-1:0]		meta_flop;
@@ -50,7 +50,7 @@ end
 always @(posedge clk or negedge rst)
 begin
 	if(!rst)
-		sync_bus <= {data_width{1'b0}};
+		sync_bus <= {dataWidth{1'b0}};
 	else
 		sync_bus <= multiplexed_bus;
 end

@@ -27,7 +27,7 @@ always@(posedge clk or negedge rst)
                 rdData <= {dataWidth{1'b0}};
                 rdData_valid <= 1'b0;
                 for(i=0;i<depth;i=i+1) begin
-                    if      (i==2)  regFile[i] <= {{dataWidth-7{1'b0}},6'h20,1'b1};
+                    if      (i==2)  regFile[i] <= {{dataWidth-8{1'b0}},6'h20,2'b01};
                     else if (i==3)  regFile[i] <= {{dataWidth-6{1'b0}},6'h20};
                     else            regFile[i] <= {dataWidth{1'b0}};
                 end
